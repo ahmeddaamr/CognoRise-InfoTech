@@ -16,6 +16,7 @@ The BMI Calculator is a simple web application that calculates Body Mass Index (
 - **CSS**: Styling for the web page.
 - **JavaScript**: Functionality for BMI calculation.
 - **Bootstrap**: Styling framework for responsive design.
+- **npm**: Package manager for managing dependencies (if applicable for backend purposes).
 
 ## Installation
 
