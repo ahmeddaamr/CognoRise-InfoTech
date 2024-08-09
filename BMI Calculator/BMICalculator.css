@@ -1,0 +1,37 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h1 {
+    margin: 100px;
+}
+
+label {
+    display: block;
+    margin: 10px;
+}
+
+input {
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+#result {
+    margin: 20px;
+    font-size: 1.2em;
+}

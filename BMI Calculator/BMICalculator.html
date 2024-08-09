@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="BMICalculator.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-dark">
+    <div class="container bg-primary text-light">
+        <h1 class="mt-3">BMI Calculator</h1>
+        <form class="form-control-lg mb-5"id="bmiForm">
+            <label class="text-light" for="weight">Weight (kg):</label>
+            <input class="form-control-lg mb-5"type="number" id="weight" required>
+
+            <label class="text-light" for="height">Height (cm):</label>
+            <input class="form-control-lg mb-5"type="number" id="height" required>
+
+            <button class="btn btn-outline-light" type="submit">Calculate BMI</button>
+        </form>
+        <div class="text-light" id="result">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('bmiForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100;
+
+            if (!isNaN(weight) && !isNaN(height)) {
+                const bmi = (weight / (height * height)).toFixed(2);
+
+                let category = '';
+                if (bmi < 18.5) {
+                    category = 'Underweight';
+                } else if (bmi >= 18.5 && bmi < 24.9) {
+                    category = 'Normal weight';
+                } else if (bmi >= 25 && bmi < 29.9) {
+                    category = 'Overweight';
+                } else {
+                    category = 'Obesity';
+                }
+
+                document.getElementById('result').innerHTML = `Your BMI is ${bmi} (${category})`;
+            } else {
+                document.getElementById('result').innerHTML = 'Please enter valid values.';
+            }
+        });
+    </script>
+</body>
+</html>
