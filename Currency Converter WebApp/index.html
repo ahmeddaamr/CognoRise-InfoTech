@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Currency Converter WebApp</title>
+    <link rel="stylesheet" href="style.css"></link>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
+</head>
+<body class="body text-bg-dark">
+    <div class="card  w-75 mb-3" style="background-color: blueviolet">
+        <h1> <i class="bi bi-currency-exchange"></i>Currency Converter</h1>
+        
+        <button class="btn btn-outline-light mt-5" id="swap" onclick="handleClick()">
+            swap <i class="bi bi-arrow-left-right"></i>
+        </button>
+        
+        <form>
+            <div class="boxes">
+                <div class="card text-bg-secondary mb-3" id="fromBox" >
+                    <div class="labelSelect">
+                        <label for="currencyFrom">From </label>
+                        <select class="form-select form-select-lg mb-3 border-bottom" name="currencyFrom" id="currencyFrom"></select>
+                    </div>
+                    <div class="labelInput">
+                        <label for="amountFrom">Amount </label>
+                        <input type="number" class="form-control"name="amountFrom" id="amountFrom">
+                    </div>
+                </div>
+                <div class="card text-bg-secondary mb-3" id="toBox">
+                    <div class="labelSelect">
+                        <label for="currencyTo">To </label>
+                        <select class="form-select form-select-lg mb-3" name="currencyTo" id="currencyTo"></select>
+                    </div>
+                    <div class="labelInput">
+                        <label for="amountTo">Amount </label>
+                        <input type="number" class="form-control" name="amountTo" id="amountTo" disabled>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-outline-light mb-3" id="convert-button" onclick="convertCurrency()">Convert</button>
+         </form>
+    </div>
+<script src="api-key.js"></script>
+<script src="currencies.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
