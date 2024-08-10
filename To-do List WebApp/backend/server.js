@@ -29,14 +29,14 @@ app.get('/get',(req,res)=>{
 // Update
 app.put('/update/:id', (req, res) => {
     const { id } = req.params;
-    const { updatedTask } = req.body;
+    const { updatedTask, checked } = req.body;
 
-    todoModel.findByIdAndUpdate(id, { task: updatedTask })//, { new: true })
+    todoModel.findByIdAndUpdate(id, { task: updatedTask, checked: checked }, { new: true })
         .then(result => {
-            res.status(200).json({ message: "Task updated successfully ", task: result });
+            res.status(200).json({ message: "Task updated successfully", task: result });
         })
         .catch(err => {
-            console.error("An error occurred while updating the task " ,err);
+            console.error("An error occurred while updating the task", err);
             res.status(500).json({ message: "An error occurred while updating the task", error: err });
         });
 });
