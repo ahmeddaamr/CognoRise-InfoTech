@@ -13,10 +13,8 @@ This To-do List WebApp is a simple and intuitive task management tool built usin
 ### Frontend
 - **Vite**: Development environment for fast build times.
 - **React**: UI library for building the user interface.
-- **React Bootstrap**: Integration of Bootstrap with React components.
 - **Axios**: Promise-based HTTP client for the browser.
 - **Bootstrap**: CSS framework for responsive design.
-- **@popperjs/core**: Tooltip and popover positioning engine used by Bootstrap.
 
 ### Backend
 - **Node.js**: JavaScript runtime environment.
@@ -45,26 +43,24 @@ Backend:
 ```
 2.Start the Node.js server:
 ```bash
-npm run dev
+npm start
 ```
 
 ### Project Structure:
 ### Frontend:
 src/: Contains the source code for the React application.
-components/: Reusable React components.
-pages/: Main pages of the web application.
-App.js: Main application component.
+App.jsx: Main application component.
 index.js: Entry point for the React application.
 public/: Contains static assets like images and the HTML template.
 
 ### Backend:
-models/: Mongoose schemas for MongoDB collections.
+Models/: Mongoose schemas for MongoDB collections.
 server.js: Entry point for the Node.js server & API operations.
 
 API Endpoints:
-GET /get/: Retrieve all to-do items.
-POST /add/:task : Add a new to-do item.
-UPDATE /update/:id/:task : update an existing to-do item.
+GET /get/ : Retrieve all to-do items.
+POST /add/ : Add a new to-do item.
+UPDATE /update/:id/ : update an existing to-do item.
 DELETE /delete/:id : Delete a to-do item by ID.
 
 Usage:
