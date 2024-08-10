@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
-import 'react-bootstrap'
-// import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
     
@@ -10,9 +8,13 @@ function App() {
   const [rerender,setRerender] =useState(0)//for rerendering
   const [task,setTask] = useState();//for create operation
   //create
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault(); // Prevent form submission
     axios.post('http://localhost:3001/add',{task: task})
-    .then(result=>console.log(result))
+    .then(result=>{
+      // console.log(result)
+      setRerender(rerender+1)
+    })
     .catch(err=>console.log(err))  
   };
   //Read
@@ -21,14 +23,15 @@ function App() {
     .then(result => setTodolist(result.data))
     .catch(err => console.log(err))
   },[rerender])
+  
   //Update
-  const handleEdit = (id,updatedTask) => {
-    axios.put(`http://localhost:3001/update/${id}`,{updatedTask})
-      .then(result => {
-        console.log("sent to backend successfuly " ,result);
-        setRerender(rerender + 1);
-      })
-      .catch(err => console.log("An error occurred while send update to backend ",err));
+  const handleEdit = (id, updatedTask, checked) => {
+    axios.put(`http://localhost:3001/update/${id}`, { updatedTask, checked })
+        .then(result => {
+            console.log("Task updated successfully", result);
+            setRerender(rerender + 1);
+        })
+        .catch(err => console.log("An error occurred while updating the task", err));
   };
   
   //Delete
@@ -37,54 +40,36 @@ function App() {
     .then(result=>{setRerender(rerender+1)})
     .catch(err=>console.log(err))  
     }
-
-    const [isChecked , setIsChecked] = useState(false)
-
-    const handleChange =()=>{
-      const checkbox = document.getElementById('myCheckbox');
-    if (checkbox.checked) {
-       setIsChecked(true)
-    } else {
-        setIsChecked(false)
-    }
-    }
       
   return (
     <>
-    <div className='content'>
-      <h1>Todo List </h1>
-      {/* <Add /> */}
-      <div className ="addTask">
-        <form className='addForm'>
+    <div className='content bg-dark'>
+      <h1 className='text-light'>Todo List </h1>
+      <div className ="addTask bg-dark">
+        <form className='addForm form-control bg-dark'>
           <input type="text" className="addText" id="addText" placeholder="Add Task Here!" onChange={(e)=>setTask(e.target.value)}/>
-          <button type="submit" className='addButton' onClick={handleAdd}>Add</button>
+          <button type="submit" className='btn btn-outline-primary addButton' onClick={handleAdd}>Add</button>
         </form>
       </div>
       <div className="tasks">
       {
         todolist.length == 0 ?
-        <h2>no current tasks</h2>
+        <h2 className='text-light'>no current tasks</h2>
         : 
         todolist.map(todo=>(
-          <div className="task" key={todo._id}>
-            {/* <div className="checkbox"> */}
-            <input type="checkbox" id="myCheckbox" onChange={handleChange} />
-            {/* </div> */}
-            <form onSubmit={(e) => e.preventDefault()}>
-              <input 
-              type="text"
-              className="taskText"
-              style={{ textDecoration: isChecked ? 'line-through' : 'none' }}
-              defaultValue={todo.task} 
-              onBlur={(e) => {
-                handleEdit(todo._id,e.target.value);
-              }} />
+          <div className="task" key={todo._id} >
+            <input className='form-check-input' type="checkbox" id="myCheckbox" 
+             checked={todo.checked}
+             onChange={(e) => {
+               const updatedChecked = e.target.checked;
+               handleEdit(todo._id, todo.task, updatedChecked);}
+               }/>
+            <form className='Edit form-control bg-dark ' onSubmit={(e) => e.preventDefault()}>
+              <input type="text" className="taskText form-control text-light bg-dark"defaultValue={todo.task} 
+              onBlur={(e) => {handleEdit(todo._id,e.target.value, todo.checked);}}
+              style={{ textDecoration: todo.checked ? 'line-through' : 'none' }} />
             </form>
-            <div >
-              {/* <button type="submit" className='editButton' onClick={()=>handleEdit(todo._id)}>Edit</button> */}
-              <button type="submit" className='deleteButton' onClick={()=>handleDelete(todo._id)}>Delete</button>
-              {/* <button type="button" className="btn btn-danger">bootstrap</button> */}
-            </div>
+            <button type="submit" className='deleteButton btn btn-outline-danger' onClick={()=>handleDelete(todo._id)}>Delete</button>
           </div>
         ))
       }
