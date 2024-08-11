@@ -58,7 +58,7 @@ function App() {
         : 
         todolist.map(todo=>(
           <div className="task" key={todo._id} >
-            <input className='form-check-input' type="checkbox" id="myCheckbox" 
+            <input className='form-check-input' type="checkbox" 
              checked={todo.checked}
              onChange={(e) => {
                const updatedChecked = e.target.checked;
